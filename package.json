@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/corevo/whiten#readme",
   "dependencies": {
-    "sinopia": "^1.4.0"
+    "sinopia": "^1.4.0",
+    "yamljs": "^0.2.4"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
