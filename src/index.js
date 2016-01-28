@@ -4,6 +4,7 @@ import mkdirp from 'mkdirp';
 import md5 from 'md5';
 import randomPort from 'random-port';
 import { EasyZip } from 'easy-zip';
+import rimraf from 'rimraf';
 import magic from './whiten';
 
 export default function whiten(savePath, modules, registry, cb) {
@@ -23,6 +24,11 @@ export default function whiten(savePath, modules, registry, cb) {
                 let zip = new EasyZip();
                 zip.zipFolder(storageDir, () => {
                     cb(zip);
+                    rimraf(tempDir, (error) => {
+                        if (error) {
+                            console.error(error);
+                        }
+                    });
                 });
             }
         });
