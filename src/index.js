@@ -7,7 +7,7 @@ import { EasyZip } from 'easy-zip';
 import rimraf from 'rimraf';
 import magic from './whiten';
 
-export default function whiten(savePath, modules, registry, cb) {
+export default function whiten(modules, registry, cb) {
     if (!registry) {
         registry = "npm";
     }
@@ -17,7 +17,7 @@ export default function whiten(savePath, modules, registry, cb) {
     mkdirp.sync(storageDir);
     mkdirp.sync(path.join(tempDir, "temp"));
     randomPort(port => {
-        magic(savePath, registry, modules, tempDir, port, (err, stdout, stderr) => {
+        magic(registry, modules, tempDir, port, (err, stdout, stderr) => {
             if (err) {
                 console.err(err);
             } else {
