@@ -1,5 +1,6 @@
 import program from 'commander';
 
+process.title = "whiten";
 program
     .version(require('../package.json').version)
     .usage('[-r] <module ...>')
