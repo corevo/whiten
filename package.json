@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/corevo/whiten#readme",
   "dependencies": {
+    "easy-zip": "0.0.4",
     "md5": "^2.0.0",
     "mkdirp": "^0.5.1",
     "random-port": "^0.1.0",
