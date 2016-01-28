@@ -1,3 +1,4 @@
+import setupEnv from '../env/sinopia';
 const exec = require('child_process').exec;
 
 function fetch(registry, path, modules) {
@@ -8,13 +9,8 @@ function fetch(registry, path, modules) {
     });
 }
 
-function setupEnv(port, config) {
-    process.argv.slice(0, 2);
-    process.argv = [...process.argv, '-l', port, '-c', config];
-}
-
 let [proc, startPath, port, config, path, modules] = process.argv;
-modules = JSON.parse(modules);
+modules = modules.split(',');
 setupEnv(port, config);
 require('sinopia/lib/cli');
 fetch(`http://localhost:${port}/`, path, modules);
