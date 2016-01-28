@@ -1,5 +1,9 @@
 # whiten
-npm/apm whitening cli utility
+npm/apm whitening cli tool
+
+allows you to download npm packages the way they are being kept in sinopia, so that you can append them to an internal or disconnected sinopia server
+
+as well as easily maintain and upgrade your internal sinopia with new packages, so all you internet-less folks can enjoy opensource software
 
 Installation: `$ npm i whiten -g`
 
