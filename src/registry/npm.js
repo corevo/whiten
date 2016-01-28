@@ -1,5 +1,20 @@
 const exec = require('child_process').exec;
 
-export default function fetch(registry, path, modules, cb) {
-    exec(`npm i --force --prefix ${path} --registry="${registry}" ${modules.join(' ')}`, cb);
+function fetch(registry, path, modules) {
+    exec(`npm i --force --prefix ${path} --registry="${registry}" ${modules.join(' ')}`, (err, stdout, stderr) => {
+        if (!err)
+            exit(0);
+        exit(1)
+    });
 }
+
+function setupEnv(port, config) {
+    process.argv.slice(0, 2);
+    process.argv = [...process.argv, '-l', port, '-c', config];
+}
+
+let [proc, startPath, port, config, path, modules] = process.argv;
+modules = JSON.parse(modules);
+setupEnv(port, config);
+require('sinopia/lib/cli');
+fetch(`http://localhost:${port}/`, path, modules);
