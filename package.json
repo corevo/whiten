@@ -1,6 +1,6 @@
 {
   "name": "whiten",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "npm/apm whitening cli utility",
   "main": "lib/index.js",
   "scripts": {
