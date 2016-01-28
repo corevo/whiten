@@ -22,6 +22,7 @@ export default function whiten(modules, registry, cb) {
             if (err) {
                 console.err(err);
             } else {
+                rimraf.sync(path.join(storageDir, '.sinopia-db.json'));
                 let zip = new EasyZip();
                 zip.zipFolder(storageDir, () => {
                     cb(zip);
