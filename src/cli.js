@@ -1,4 +1,6 @@
+import path from 'path';
 import program from 'commander';
+import whiten from './index';
 
 process.title = "whiten";
 program
@@ -12,3 +14,6 @@ let modules = program.args;
 if (modules.constructor !== Array || modules.length < 1) {
     program.help();
 }
+whiten(modules, program.registry, (zip) => {
+    zip.writeToFile(path.join(process.cwd(), modules.join(' ') + '.zip'));
+});
