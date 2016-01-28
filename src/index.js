@@ -8,7 +8,8 @@ import rimraf from 'rimraf';
 import magic from './whiten';
 
 export default function whiten(modules, registry, cb) {
-    if (!registry) {
+    if (!registry || typeof registry !== 'string') {
+        cb = typeof registry === 'function' ? registry : undefined;
         registry = "npm";
     }
     let tempDir = path.join(os.tmpdir(), "whiten-" + md5(new Date().toString()));
