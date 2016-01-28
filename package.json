@@ -25,6 +25,7 @@
   "dependencies": {
     "md5": "^2.0.0",
     "mkdirp": "^0.5.1",
+    "random-port": "^0.1.0",
     "sinopia": "^1.4.0",
     "yamljs": "^0.2.4"
   },
