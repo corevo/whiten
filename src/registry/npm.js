@@ -3,8 +3,8 @@ const exec = require('child_process').exec;
 function fetch(registry, path, modules) {
     exec(`npm i --force --prefix ${path} --registry="${registry}" ${modules.join(' ')}`, (err, stdout, stderr) => {
         if (!err)
-            exit(0);
-        exit(1)
+            process.exit(0);
+        process.exit(1)
     });
 }
 
