@@ -7,7 +7,7 @@ as well as easily maintain and upgrade your internal sinopia with new packages, 
 
 Installation: `$ npm i whiten -g`
 
-Usage: `$ whiten react react-dom` will create a zipped file at the cwd
+Usage: `$ whiten react react-dom` will create a zipped file at the cwd, that you can extract to your sinopia storage directory
 
 ## API
 
