@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/corevo/whiten#readme",
   "dependencies": {
-    "require-all": "^2.0.0",
     "sinopia": "^1.4.0",
     "yamljs": "^0.2.4"
   },
