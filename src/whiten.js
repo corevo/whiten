@@ -3,7 +3,7 @@ import fs from 'fs';
 import YAML from 'yamljs';
 const exec = require('child_process').exec;
 
-const defaultConfig = YAML.load('lib/config.yaml');
+const defaultConfig = YAML.load(path.join(__dirname, 'config.yaml'));
 
 function saveConfig(storagePath) {
     let config = Object.assign(defaultConfig, { storage: path.join(storagePath, 'storage') });
