@@ -3,17 +3,28 @@ import os from 'os';
 import mkdirp from 'mkdirp';
 import md5 from 'md5';
 import randomPort from 'random-port';
+import { EasyZip } from 'easy-zip';
 import magic from './whiten';
 
-export default function whiten(savePath, modules, registry) {
+export default function whiten(savePath, modules, registry, cb) {
     if (!registry) {
         registry = "npm";
     }
     let tempDir = path.join(os.tmpdir(), "whiten-" + md5(new Date().toString()));
     console.log("Downloading to " + tempDir);
-    mkdirp.sync(path.join(tempDir, "storage"));
+    let storageDir = path.join(tempDir, "storage");
+    mkdirp.sync(storageDir);
     mkdirp.sync(path.join(tempDir, "temp"));
     randomPort(port => {
-        magic(savePath, registry, modules, tempDir, port);
+        magic(savePath, registry, modules, tempDir, port, (err, stdout, stderr) => {
+            if (err) {
+                console.err(err);
+            } else {
+                let zip = new EasyZip();
+                zip.zipFolder(storageDir, () => {
+                    cb(zip);
+                });
+            }
+        });
     });
 }
