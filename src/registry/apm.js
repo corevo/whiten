@@ -38,3 +38,9 @@ export default function fetch(port, config, storagePath, modules) {
         npmFetch(port, config, path.join(storagePath, "temp"), dependencies);
     });
 }
+
+if (require.main === module) {
+    let [proc, startPath, port, config, path, modules] = process.argv;
+    modules = modules.split(',');
+    fetch(port, config, path, modules);
+}
