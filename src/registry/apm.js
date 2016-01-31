@@ -40,7 +40,7 @@ export default function fetch(port, config, storagePath, modules) {
 }
 
 if (require.main === module) {
-    let [proc, startPath, port, config, path, modules] = process.argv;
+    let [proc, startPath, port, config, storage, modules] = process.argv;
     modules = modules.split(',');
-    fetch(port, config, path, modules);
+    fetch(port, config, storage, modules);
 }
