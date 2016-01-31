@@ -9,7 +9,7 @@ function install(registry, path, modules) {
     });
 }
 
-function fetch(port, config, path, modules) {
+export default function fetch(port, config, path, modules) {
     setupEnv(port, config);
     require('sinopia/lib/cli');
     install(`http://localhost:${port}/`, path, modules);
