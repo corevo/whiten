@@ -26,6 +26,7 @@
     "whiten": "lib/cli.js"
   },
   "dependencies": {
+    "bluebird": "^3.1.5",
     "commander": "^2.9.0",
     "easy-zip": "0.0.4",
     "md5": "^2.0.0",
@@ -34,6 +35,7 @@
     "rimraf": "^2.5.1",
     "sinopia": "^1.4.0",
     "superagent": "^1.7.2",
+    "superagent-bluebird-promise": "^3.0.0",
     "yamljs": "^0.2.4"
   },
   "devDependencies": {
