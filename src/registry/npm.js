@@ -12,9 +12,11 @@ function install(registry, path, modules) {
 function fetch(port, config, path, modules) {
     setupEnv(port, config);
     require('sinopia/lib/cli');
-    fetch(`http://localhost:${port}/`, path, modules);
+    install(`http://localhost:${port}/`, path, modules);
 }
 
-let [proc, startPath, port, config, path, modules] = process.argv;
-modules = modules.split(',');
-fetch(port, config, path, modules);
+if (require.main === module) {
+    let [proc, startPath, port, config, path, modules] = process.argv;
+    modules = modules.split(',');
+    fetch(port, config, path, modules);
+}
