@@ -1,9 +1,10 @@
+import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import mkdirp from 'mkdirp';
 import md5 from 'md5';
 import randomPort from 'random-port';
-import { EasyZip } from 'easy-zip';
+import tar from 'tar-fs';
 import rimraf from 'rimraf';
 import magic from './whiten';
 
@@ -34,17 +35,14 @@ export default function whiten(modules, registry, cb) {
                 console.err(err);
             } else {
                 rimraf.sync(path.join(storageDir, '.sinopia-db.json'));
-                let zip = new EasyZip();
-                zip.zipFolder(storageDir, () => {
-                    if (registry === "apm") {
-                        zip.zipFolder(path.join(tempDir, "atom"), () => {
-                            cb(zip);
-                            cleanup(tempDir);
-                        });
-                    } else {
-                        cb(zip);
-                        cleanup(tempDir);
-                    }
+                let packedFolders = ['storage'];
+                if (registry === "apm") {
+                    packedFolders.push("atom");
+                }
+                cb(tar.pack(tempDir, {
+                    entries: packedFolders
+                }), () => {
+                    cleanup(tempDir);
                 });
             }
         });

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import fs from 'fs';
 import path from 'path';
 import program from 'commander';
 import whiten from './index';
@@ -17,6 +18,8 @@ if (modules.constructor !== Array || modules.length < 1) {
     program.help();
 }
 
-whiten(modules, program.registry, (zip) => {
-    zip.writeToFile(path.join(process.cwd(), modules.join(' ') + '.zip'));
+whiten(modules, program.registry, (tar, cb) => {
+    tar.pipe(fs.createWriteStream(path.join(process.cwd(), modules.join(' ') + '.tar'))).on('finish', () => {
+        cb();
+    });
 });
