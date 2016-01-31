@@ -7,6 +7,14 @@ import { EasyZip } from 'easy-zip';
 import rimraf from 'rimraf';
 import magic from './whiten';
 
+function cleanup(directory) {
+    rimraf(directory, (error) => {
+        if (error) {
+            console.error(error);
+        }
+    });
+}
+
 export default function whiten(modules, registry, cb) {
     if (!registry || typeof registry !== 'string') {
         cb = typeof registry === 'function' ? registry : undefined;
@@ -28,12 +36,15 @@ export default function whiten(modules, registry, cb) {
                 rimraf.sync(path.join(storageDir, '.sinopia-db.json'));
                 let zip = new EasyZip();
                 zip.zipFolder(storageDir, () => {
-                    cb(zip);
-                    rimraf(tempDir, (error) => {
-                        if (error) {
-                            console.error(error);
-                        }
-                    });
+                    if (registry === "apm") {
+                        zip.zipFolder(path.join(tempDir, "atom"), () => {
+                            cb(zip);
+                            cleanup(tempDir);
+                        });
+                    } else {
+                        cb(zip);
+                        cleanup(tempDir);
+                    }
                 });
             }
         });
