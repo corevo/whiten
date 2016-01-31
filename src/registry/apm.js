@@ -35,6 +35,6 @@ export default function fetch(port, config, storagePath, modules) {
         extensions: {}
     }).then(({ dependencies, extensions }) => {
         downloadPackages(extensions, path.join(storagePath, "atom"));
-        npmFetch(port, config, path.join(storagePath, "npm"), dependencies);
+        npmFetch(port, config, path.join(storagePath, "temp"), dependencies);
     });
 }
