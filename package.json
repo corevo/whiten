@@ -37,6 +37,7 @@
     "sinopia": "^1.4.0",
     "superagent": "^1.7.2",
     "superagent-bluebird-promise": "^3.0.0",
+    "tar-fs": "^1.9.0",
     "yamljs": "^0.2.4"
   },
   "devDependencies": {
