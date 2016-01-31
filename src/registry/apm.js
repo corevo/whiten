@@ -3,6 +3,7 @@ import path from 'path';
 import Promise from 'bluebird';
 import request from 'superagent-bluebird-promise';
 import download from 'request';
+import npmFetch from './npm';
 
 const apmApi = process.env.ATOM_API_URL || 'https://atom.io/api';
 
@@ -34,5 +35,6 @@ export default function fetch(port, config, storagePath, modules) {
         extensions: {}
     }).then(({ dependencies, extensions }) => {
         downloadPackages(extensions, path.join(storagePath, "atom"));
+        npmFetch(port, config, path.join(storagePath, "npm"), dependencies);
     });
 }
