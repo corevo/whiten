@@ -15,5 +15,6 @@ function saveConfig(storagePath) {
 
 export default function whiten(registry, modules, storagePath, port, cb) {
     let configPath = saveConfig(storagePath);
-    exec(`node ${path.resolve(__dirname + "/registry/npm.js")} ${port} ${configPath} ${path.join(storagePath, "temp")} ${modules.join(',')}`, cb);
+    let storage = registry === "npm" ? path.join(storagePath, "temp") : storagePath;
+    exec(`node ${path.resolve(__dirname + "/registry/" + registry + ".js")} ${port} ${configPath} ${storage} ${modules.join(',')}`, cb);
 }
