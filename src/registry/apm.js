@@ -8,6 +8,6 @@ export default function fetch(port, config, path, modules) {
         request.get(`${apmApi}/packages/${module}`).promise()
     ))).map(extension => {
         extension = JSON.parse(extension.text);
-        let latest = extension.versions[extension.releases.latest];
+        let pkg = extension.versions[extension.releases.latest];
     });
 }
