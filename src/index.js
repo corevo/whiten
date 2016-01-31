@@ -17,6 +17,9 @@ export default function whiten(modules, registry, cb) {
     let storageDir = path.join(tempDir, "storage");
     mkdirp.sync(storageDir);
     mkdirp.sync(path.join(tempDir, "temp"));
+    if (registry === "apm") {
+        mkdirp.sync(path.join(tempDir, "atom"));
+    }
     randomPort(port => {
         magic(registry, modules, tempDir, port, (err, stdout, stderr) => {
             if (err) {
