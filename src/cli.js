@@ -9,7 +9,7 @@ process.title = "whiten";
 program
     .version(require('../package.json').version)
     .usage('[options] <module ...>')
-    .option('-r --registry [source]', 'Source to whiten from (npm), if none given npm will be assumed', /^(npm|apm)$/i, 'npm')
+    .option('-r --registry [source]', 'Source to whiten from (npm or apm), if none given npm will be assumed', /^(npm|apm)$/i, 'npm')
     .parse(process.argv);
 
 let modules = program.args;
