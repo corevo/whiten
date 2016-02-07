@@ -3,9 +3,12 @@ const exec = require('child_process').exec;
 
 function install(registry, path, modules) {
     exec(`npm i --force --prefix ${path} --registry="${registry}" ${modules.join(' ')}`, (err, stdout, stderr) => {
-        if (!err)
+        if (!err) {
             process.exit(0);
-        process.exit(1)
+        } else {
+            console.error(stderr);
+            process.exit(1)
+        }
     });
 }
 
