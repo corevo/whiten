@@ -32,7 +32,7 @@ export default function whiten(modules, registry, cb) {
     randomPort(port => {
         magic(registry, modules, tempDir, port, (err, stdout, stderr) => {
             if (err) {
-                console.err(err);
+                console.error(err);
             } else {
                 rimraf.sync(path.join(storageDir, '.sinopia-db.json'));
                 let packedFolders = ['storage'];
