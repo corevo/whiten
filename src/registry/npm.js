@@ -3,19 +3,25 @@ const exec = require('child_process').exec;
 
 function install(registry, path, modules) {
     exec(`npm i --force --prefix ${path} --registry="${registry}" ${modules.join(' ')}`, (err, stdout, stderr) => {
-        if (!err) {
-            process.exit(0);
-        } else {
+        let code = 0;
+        if (err) {
+            code = 1;
             console.error(stderr);
-            process.exit(1)
+        }
+        if (require.main === module) {
+            process.exit(code);
+        } else {
+            cb(() => {
+                process.exit(code);
+            });
         }
     });
 }
 
-export default function fetch(port, config, path, modules) {
+export default function fetch(port, config, path, modules, cb) {
     setupEnv(port, config);
     require('sinopia/lib/cli');
-    install(`http://localhost:${port}/`, path, modules);
+    install(`http://localhost:${port}/`, path, modules, cb);
 }
 
 if (require.main === module) {
