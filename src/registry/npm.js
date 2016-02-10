@@ -1,7 +1,7 @@
 import setupEnv from '../env/sinopia';
 const exec = require('child_process').exec;
 
-function install(registry, path, modules) {
+function install(registry, path, modules, cb) {
     exec(`npm i --force --prefix ${path} --registry="${registry}" ${modules.join(' ')}`, (err, stdout, stderr) => {
         let code = 0;
         if (err) {
