@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import program from 'commander';
 import whiten from './index';
+import isPackage from './package.js';
 
 process.title = "whiten";
 program
@@ -15,6 +16,12 @@ program
 let modules = program.args;
 
 if (modules.constructor !== Array) {
+    program.help();
+}
+if (modules.length === 1 && modules[0] === '.') {
+    modules.pop();
+}
+if (modules.length === 0 && !isPackage(process.cwd())) {
     program.help();
 }
 
