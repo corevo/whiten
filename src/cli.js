@@ -9,7 +9,7 @@ import isPackage from './package.js';
 process.title = "whiten";
 program
     .version(require('../package.json').version)
-    .usage('[options] <module ...>')
+    .usage('[options] <module ...> or . (to whiten current directory)')
     .option('-r --registry [source]', 'Source to whiten from (npm or apm), if none given npm will be assumed', /^(npm|apm)$/i, 'npm')
     .parse(process.argv);
 
