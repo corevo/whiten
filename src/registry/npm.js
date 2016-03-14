@@ -26,6 +26,6 @@ export default function fetch(port, config, path, modules, cb) {
 
 if (require.main === module) {
     let [proc, startPath, port, config, path, modules] = process.argv;
-    modules = modules.split(',');
+    modules = modules ? modules.split(',') : [process.cwd()];
     fetch(port, config, path, modules);
 }
