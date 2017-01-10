@@ -20,7 +20,7 @@ function install(registry, path, modules, cb) {
 
 export default function fetch(port, config, path, modules, cb) {
     setupEnv(port, config);
-    require('sinopia/lib/cli');
+    require('sinopia2/lib/cli');
     install(`http://localhost:${port}/`, path, modules, cb);
 }
 
