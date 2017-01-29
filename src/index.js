@@ -33,13 +33,14 @@ export default function whiten(modules, registry, cb) {
         magic(registry, modules, tempDir, port, (err, stdout, stderr) => {
             if (err) {
                 console.error(err);
+                cb(err);
             } else {
                 rimraf.sync(path.join(storageDir, '.sinopia-db.json'));
                 let packedFolders = ['storage'];
                 if (registry === "apm") {
                     packedFolders.push("atom");
                 }
-                cb(tar.pack(tempDir, {
+                cb(undefined, tar.pack(tempDir, {
                     entries: packedFolders
                 }), () => {
                     cleanup(tempDir);
