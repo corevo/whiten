@@ -11,7 +11,7 @@ program
     .version(require('../package.json').version)
     .usage('[options] <module ...> or . (to whiten current directory)')
     .option('-r --registry [source]', 'Source to whiten from (npm or apm), if none given npm will be assumed', /^(npm|apm)$/i, 'npm')
-    .option('-n --name <name>', 'Save the bundle under name, if not given a list of all packages will be used', '')
+    .option('-n --name <name>', 'Save the bundle under the given name, if not given a list of all packages will be used', '')
     .parse(process.argv);
 
 let modules = program.args;
