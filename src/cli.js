@@ -11,6 +11,7 @@ program
     .version(require('../package.json').version)
     .usage('[options] <module ...> or . (to whiten current directory)')
     .option('-r --registry [source]', 'Source to whiten from (npm or apm), if none given npm will be assumed', /^(npm|apm)$/i, 'npm')
+    .option('-n --name <name>', 'Save the bundle under name, if not given a list of all packages will be used', '')
     .parse(process.argv);
 
 let modules = program.args;
@@ -26,7 +27,7 @@ if (modules.length === 0 && !isPackage(process.cwd())) {
 }
 
 whiten(modules, program.registry, (err, tar, cb) => {
-    let name = modules.join(' ').replace('/', '-');
+    let name = program.name !== '' ? program.name : modules.join(' ').replace('/', '-');
     name = name ? name : path.basename(process.cwd());
     tar.pipe(fs.createWriteStream(path.join(process.cwd(), name + '.tar'))).on('finish', () => {
         cb();
