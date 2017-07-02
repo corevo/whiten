@@ -27,7 +27,7 @@ if (modules.length === 0 && !isPackage(process.cwd())) {
 }
 
 whiten(modules, program.registry, (err, tar, cb) => {
-    let name = program.name !== '' ? program.name : modules.join(' ').replace('/', '-');
+    let name = program.name ? program.name : modules.join(' ').replace('/', '-');
     name = name ? name : path.basename(process.cwd());
     tar.pipe(fs.createWriteStream(path.join(process.cwd(), name + '.tar'))).on('finish', () => {
         cb();
